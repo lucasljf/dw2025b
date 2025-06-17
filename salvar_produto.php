@@ -1,28 +1,35 @@
 <?php
-    $nome = $_GET['nome'];
-    $data_validade = $_GET['data_validade'];
-    $quantidade = $_GET['quantidade'];
+    require_once "conexao.php";
+    
+    $nome = $_POST['nome'];
+    $data_validade = $_POST['data_validade'];
+    $quantidade = $_POST['quantidade'];
 
-    // informações do banco de dados
-    $servidor = "db";
-    $usuario = "root";
-    $senha = "123";
-    $banco = "banco_elaine";
+    $nome_arquivo = $_FILES['foto']['name'];
+    $caminho_temporario = $_FILES['foto']['tmp_name'];
 
-    // se conectar ao banco
-    $conexao = mysqli_connect($servidor, $usuario, $senha, $banco);
+    // pegar a extensão
+    $extensao = pathinfo($nome_arquivo, PATHINFO_EXTENSION);
 
+    // gerar um novo nome para o arquivo
+    $novo_nome = uniqid() . "." . $extensao;
+
+    // definir onde vou salvar no servidor
+    // lembre-se de criar a pasta e ajustar as permissões
+    $caminho_destino = "fotos/" . $novo_nome;
+
+    // copiar para o servidor
+    move_uploaded_file($caminho_temporario, $caminho_destino);
 
     // INSERT INTO tb_produto (nome, data_validade, quantidade) VALUES ("Pepsi", "2025-12-30", 200);
-    
-    $sql = "INSERT INTO tb_produto (nome, data_validade, quantidade) VALUES (?, ?, ?);";
+    $sql = "INSERT INTO tb_produto (nome, data_validade, quantidade, foto) VALUES (?, ?, ?, ?)";
 
     $comando = mysqli_prepare($conexao, $sql);
 
     // letra s -> varchar, date
     // letra d -> float, decimal
     // letra i -> int
-    mysqli_stmt_bind_param($comando, "ssi", $nome, $data_validade, $quantidade);
+    mysqli_stmt_bind_param($comando, "ssis", $nome, $data_validade, $quantidade, $novo_nome);
 
     mysqli_stmt_execute($comando);
 

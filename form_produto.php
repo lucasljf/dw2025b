@@ -8,13 +8,16 @@
 <body>
     <h1>Cadastrar Produto</h1>
 
-    <form action="salvar_produto.php">
+    <form action="salvar_produto.php" method="post" enctype="multipart/form-data">
         Nome: <br>
         <input type="text" name="nome"> <br><br>
         Data de validade: <br>
         <input type="text" name="data_validade"> <br><br>
         Quantidade: <br>
         <input type="text" name="quantidade"> <br><br>
+
+        Foto: <br>
+        <input type="file" name="foto"> <br><br>
 
         <input type="submit" value="Cadastrar Produto">
     </form>

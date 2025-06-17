@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        img {
+            width: 60px;
+            height: 60px;
+        }
+    </style>
 </head>
 <body>
     <h2>Lista de Produtos Cadastrados</h2>
@@ -24,6 +30,7 @@
         echo "<table border='1'>";
         echo "<tr>";
         echo "<td>ID</td>";
+        echo "<td>FOTO</td>";
         echo "<td>Nome</td>";
         echo "<td>Data de Validade</td>";
         echo "<td>Quantidade</td>";
@@ -35,9 +42,11 @@
             $nome = $produto['nome'];
             $validade = $produto['data_validade'];
             $quantidade = $produto['quantidade'];
+            $foto = $produto['foto'];
             
             echo "<tr>";
             echo "<td>$id</td>";
+            echo "<td><img src='fotos/$foto'></td>";
             echo "<td>$nome</td>";
             echo "<td>$validade</td>";
             echo "<td>$quantidade</td>";
