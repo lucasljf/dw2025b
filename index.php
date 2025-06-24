@@ -14,5 +14,6 @@
     <br> 
     <hr>
     <a href="lista_produtos.php">Lista de produtos</a> <br>
+    <a href="lista_produtos_2.php">Lista de produtos (card)</a> <br>
 </body>
 </html>
