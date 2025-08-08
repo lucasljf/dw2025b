@@ -8,7 +8,7 @@
 <body>
     <h1>Cadrastro cliente</h1>
 
-    <form action="saida_cliente.php">
+    <form action="salvar_cliente.php">
         Nome: <br>
         <input type="text" name="nome"> <br><br>
         Endereço: <br>
@@ -16,7 +16,7 @@
         Email: <br>
         <input type="text" name="email"> <br> <br>
         Data de nascimento: <br>
-        <input type="text" name="data_nascimento"> <br> <br>
+        <input type="text" name="nascimento"> <br> <br>
         <br>
         <input type="submit" value="Cadastrar Cliente">
 
