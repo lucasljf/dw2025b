@@ -4,6 +4,7 @@
     $nome = $_POST['nome'];
     $data_validade = $_POST['data_validade'];
     $quantidade = $_POST['quantidade'];
+    $categoria = $_POST['categoria'];
 
     $nome_arquivo = $_FILES['foto']['name'];
     $caminho_temporario = $_FILES['foto']['tmp_name'];
@@ -22,14 +23,14 @@
     move_uploaded_file($caminho_temporario, $caminho_destino);
 
     // INSERT INTO tb_produto (nome, data_validade, quantidade) VALUES ("Pepsi", "2025-12-30", 200);
-    $sql = "INSERT INTO tb_produto (nome, data_validade, quantidade, foto) VALUES (?, ?, ?, ?)";
+    $sql = "INSERT INTO tb_produto (nome, data_validade, quantidade, foto, id_categoria) VALUES (?, ?, ?, ?, ?)";
 
     $comando = mysqli_prepare($conexao, $sql);
 
     // letra s -> varchar, date
     // letra d -> float, decimal
     // letra i -> int
-    mysqli_stmt_bind_param($comando, "ssis", $nome, $data_validade, $quantidade, $novo_nome);
+    mysqli_stmt_bind_param($comando, "ssisi", $nome, $data_validade, $quantidade, $novo_nome, $categoria);
 
     mysqli_stmt_execute($comando);
 

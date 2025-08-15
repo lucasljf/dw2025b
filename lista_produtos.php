@@ -19,7 +19,7 @@
         require_once "conexao.php";
 
         // SELECT * FROM tb_produto;
-        $sql = "SELECT * FROM tb_produto";
+        $sql = "SELECT id_produto, tb_produto.nome AS nome_produto, tb_categoria.nome AS nome_categoria, data_validade, quantidade, foto FROM tb_produto INNER JOIN tb_categoria ON tb_produto.id_categoria = tb_categoria.id_categoria ORDER BY id_produto ASC";
 
         $comando = mysqli_prepare($conexao, $sql);
 
@@ -32,27 +32,30 @@
         echo "<td>ID</td>";
         echo "<td>FOTO</td>";
         echo "<td>Nome</td>";
+        echo "<td>Categoria</td>";
         echo "<td>Data de Validade</td>";
         echo "<td>Quantidade</td>";
+        echo "<td>AÇÕES</td>";
         echo "</tr>";
         //imprimir os produtos.
         while ($produto = mysqli_fetch_assoc($resultados)) {
             // print_r($produto);
             $id = $produto['id_produto'];
-            $nome = $produto['nome'];
+            $nome_produto = $produto['nome_produto'];
             $validade = $produto['data_validade'];
             $quantidade = $produto['quantidade'];
             $foto = $produto['foto'];
+            $nome_categoria = $produto['nome_categoria'];
             
             echo "<tr>";
             echo "<td>$id</td>";
             echo "<td><img src='fotos/$foto'></td>";
-            echo "<td>$nome</td>";
+            echo "<td>$nome_produto</td>";
+            echo "<td>$nome_categoria</td>";
             echo "<td>$validade</td>";
             echo "<td>$quantidade</td>";
+            echo "<td><a href='deletar_produto.php?id=$id'><img src='delete-button.png'></a></td>";
             echo "</tr>";
-            // echo "$id - $nome";
-            // echo "<br>";
         }
         echo "</table>";
 

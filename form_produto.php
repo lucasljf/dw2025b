@@ -16,6 +16,30 @@
         Quantidade: <br>
         <input type="text" name="quantidade"> <br><br>
 
+        Categoria: <br>
+        <select name="categoria">
+            <?php
+                require_once "conexao.php";
+
+                $sql = "SELECT * FROM tb_categoria";
+
+                $comando = mysqli_prepare($conexao, $sql);
+
+                mysqli_stmt_execute($comando);
+
+                $resultados = mysqli_stmt_get_result($comando);
+                
+                while ($categoria = mysqli_fetch_assoc($resultados)) {
+                    $nome = $categoria['nome'];
+                    $id = $categoria['id_categoria'];
+
+                    echo "<option value='$id'>$nome</option>";
+                }
+
+                mysqli_stmt_close($comando);
+            ?>
+        </select> <br><br>
+
         Foto: <br>
         <input type="file" name="foto"> <br><br>
 
