@@ -13,6 +13,7 @@
     <a href="form_cliente.php"> Cadastrar cliente</a>
     <br> 
     <hr>
+    <a href="lista_clientes.php">Lista de clientes</a> <br>
     <a href="lista_produtos.php">Lista de produtos</a> <br>
     <a href="lista_produtos_2.php">Lista de produtos (card)</a> <br>
 </body>

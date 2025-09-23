@@ -35,7 +35,7 @@
         echo "<td>Categoria</td>";
         echo "<td>Data de Validade</td>";
         echo "<td>Quantidade</td>";
-        echo "<td>AÇÕES</td>";
+        echo "<td colspan='2'>AÇÕES</td>";
         echo "</tr>";
         //imprimir os produtos.
         while ($produto = mysqli_fetch_assoc($resultados)) {
@@ -55,6 +55,7 @@
             echo "<td>$validade</td>";
             echo "<td>$quantidade</td>";
             echo "<td><a href='deletar_produto.php?id=$id'><img src='delete-button.png'></a></td>";
+            echo "<td><a href='#'>editar</a></td>";
             echo "</tr>";
         }
         echo "</table>";
