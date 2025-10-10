@@ -1,10 +1,16 @@
+<?php
+require_once "verifica_logado_funcionario.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <h1>Cadastrar Produto</h1>
 
@@ -19,24 +25,22 @@
         Categoria: <br>
         <select name="categoria">
             <?php
-                require_once "conexao.php";
+            require_once "conexao.php";
 
-                $sql = "SELECT * FROM tb_categoria";
+            $sql = "SELECT * FROM tb_categoria";
+            $comando = mysqli_prepare($conexao, $sql);
+            mysqli_stmt_execute($comando);
 
-                $comando = mysqli_prepare($conexao, $sql);
+            $resultados = mysqli_stmt_get_result($comando);
 
-                mysqli_stmt_execute($comando);
+            while ($categoria = mysqli_fetch_assoc($resultados)) {
+                $nome = $categoria['nome'];
+                $id = $categoria['id_categoria'];
 
-                $resultados = mysqli_stmt_get_result($comando);
-                
-                while ($categoria = mysqli_fetch_assoc($resultados)) {
-                    $nome = $categoria['nome'];
-                    $id = $categoria['id_categoria'];
+                echo "<option value='$id'>$nome</option>";
+            }
 
-                    echo "<option value='$id'>$nome</option>";
-                }
-
-                mysqli_stmt_close($comando);
+            mysqli_stmt_close($comando);
             ?>
         </select> <br><br>
 
@@ -46,4 +50,5 @@
         <input type="submit" value="Cadastrar Produto">
     </form>
 </body>
+
 </html>
