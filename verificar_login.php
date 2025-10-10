@@ -15,7 +15,7 @@ $resultados = mysqli_stmt_get_result($comando);
 $quantidade = mysqli_num_rows($resultados);
 
 if ($quantidade == 0) {
-    header("Location: index.php");
+    header("Location: index.php?msg=erro");
 } else {
     $usuario = mysqli_fetch_assoc($resultados);
     $tipo = $usuario['tipo'];
